@@ -49,4 +49,3 @@ return (n);
 /**
  * main - multiplies two numbers
  * @argc
-
