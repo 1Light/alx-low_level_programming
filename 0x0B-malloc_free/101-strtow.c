@@ -9,23 +9,23 @@
  */
 int count_word(char *s)
 {
-	int flag, c, w;
+    int flag, c, w;
 
-	flag = 0;
-	w = 0;
+    flag = 0;
+    w = 0;
 
-	for (c = 0; s[c] != '\0'; c++)
-	{
-		if (s[c] == ' ')
-			flag = 0;
-		else if (flag == 0)
-		{
-			flag = 1;
-			w++;
-		}
-	}
+    for (c = 0; s[c] != '\0'; c++)
+    {
+        if (s[c] == ' ')
+            flag = 0;
+        else if (flag == 0)
+        {
+            flag = 1;
+            w++;
+        }
+    }
 
-	return (w);
+    return w;
 }
 
 /**
@@ -35,29 +35,29 @@ int count_word(char *s)
  */
 void split_string(char *str, char **matrix)
 {
-	int i, k = 0, c = 0, start, end;
+    int i, k = 0, c = 0, start, end;
 
-	for (i = 0; str[i]; i++)
-	{
-		if (str[i] == ' ')
-		{
-			if (c)
-			{
-				end = i;
-				matrix[k] = malloc(c + 1);
-				if (matrix[k] == NULL)
-					return;
+    for (i = 0; str[i]; i++)
+    {
+        if (str[i] == ' ')
+        {
+            if (c)
+            {
+                end = i;
+                matrix[k] = malloc(c + 1);
+                if (matrix[k] == NULL)
+                    return;
 
-				while (start < end)
-					matrix[k][c++] = str[start++];
-				matrix[k][c] = '\0';
-				k++;
-				c = 0;
-			}
-		}
-		else if (c++ == 0)
-			start = i;
-	}
+                while (start < end)
+                    matrix[k][c++] = str[start++];
+                matrix[k][c] = '\0';
+                k++;
+                c = 0;
+            }
+        }
+        else if (c++ == 0)
+            start = i;
+    }
 }
 
 /**
@@ -68,18 +68,19 @@ void split_string(char *str, char **matrix)
  */
 char **strtow(char *str)
 {
-	int words = count_word(str);
+    int words = count_word(str);
+    char **matrix;
+    
+    if (words == 0)
+        return NULL;
 
-	if (words == 0)
-		return (NULL);
+    matrix = malloc(sizeof(char *) * (words + 1));
 
-	char **matrix = malloc(sizeof(char *) * (words + 1));
+    if (matrix == NULL)
+        return NULL;
 
-	if (matrix == NULL)
-		return (NULL);
+    split_string(str, matrix);
+    matrix[words] = NULL;
 
-	split_string(str, matrix);
-	matrix[words] = NULL;
-
-	return (matrix);
+    return matrix;
 }
