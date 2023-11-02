@@ -1,114 +1,137 @@
 #include "main.h"
 #include <stdio.h>
-#include <string.h>
-
+#include <stdlib.h>
 /**
- * _isdigit - checks if character is digit
- * @c: the character to check
- *
- * Return: 1 if digit, 0 otherwise
- */
-int _isdigit(int c)
+  * int_calloc - special calloc but 4 int arrays
+  * @nmemb: n memb
+  * @size: size of array
+  * Return: int *
+  */
+int *int_calloc(int nmemb, unsigned int size)
 {
-	return (c >= '0' && c <= '9');
+	/* declarations */
+	int *p, n;
+	/* checking inputs */
+	if (nmemb == 0 || size == 0)
+		return (NULL);
+	/* malloc the space & check for fail */
+	p = malloc(nmemb * size);
+	if (p == NULL)
+		return (NULL);
+	/* calloc */
+	for (n = 0; n < nmemb; n++)
+		p[n] = 0;
+	return (p);
 }
 
 /**
- * _strlen - returns the length of a string
- * @s: the string whose length to check
- *
- * Return: integer length of string
- */
-int _strlen(char *s)
+  * mult - multiplication
+  * @product: int * 4 answer
+  * @n1: string num1
+  * @n2: string num2
+  * @len1: len num1
+  * @len2: len num2
+  * Return: void
+  */
+void mult(int *product, char *n1, char *n2, int len1, int len2)
 {
-	int i = 0;
-
-	while (*s++)
-		i++;
-	return (i);
-}
-
-/**
- * big_multiply - multiply two big number strings
- * @s1: the first big number string
- * @s2: the second big number string
- *
- * Return: the product big number string
- */
-char *big_multiply(char *s1, char *s2)
-{
-	char *r;
-	int l1, l2, a, b, c, x;
-
-	l1 = _strlen(s1);
-	l2 = _strlen(s2);
-	r = malloc(a = x = l1 + l2);
-	if (!r)
-		printf("Error\n"), exit(98);
-	while (a--)
-		r[a] = 0;
-
-	for (l1--; l1 >= 0; l1--)
+	/* declarations */
+	int i;
+	int j;
+	int f1, f2;
+	int sum;
+	/* the long math */
+	for (i = len1 - 1; i >= 0; i--)
 	{
-		if (!_isdigit(s1[l1]))
+		sum = 0;
+		f1 = n1[i] - '0';
+		for (j = len2 - 1; j >= 0; j--)
 		{
-			free(r);
-			printf("Error\n"), exit(98);
+			f2 = n2[j] - '0';
+			sum += product[i + j + 1] + (f1 * f2);
+			product[i + j + 1] = sum % 10;
+			sum /= 10;
 		}
-		a = s1[l1] - '0';
-		c = 0;
-
-		for (l2 = _strlen(s2) - 1; l2 >= 0; l2--)
-		{
-			if (!_isdigit(s2[l2]))
-			{
-				free(r);
-				printf("Error\n"), exit(98);
-			}
-			b = s2[l2] - '0';
-
-			c += r[l1 + l2 + 1] + (a * b);
-			r[l1 + l2 + 1] = c % 10;
-
-			c /= 10;
-		}
-		if (c)
-			r[l1 + l2 + 1] += c;
+		if (sum > 0)
+			product[i + j + 1] += sum;
 	}
-	return (r);
+	for (i = 0; product[i] == 0 && i < len1 + len2; i++)
+	{}
+	if (i == len1 + len2)
+		_putchar('0');
+	for (; i < len1 + len2; i++)
+		_putchar(product[i] + '0');
+	_putchar('\n');
 }
 
-
 /**
- * main - multiply two big number strings
- * @argc: the number of arguments
- * @argv: the argument vector
- *
- * Return: Always 0 on success.
- */
+  * is_valid - is the number a valid one
+  * @num : char string num
+  * Return: int, 1 if true 0 if false
+  */
+int is_valid(char *num)
+{
+	/* declarations */
+	int i;
+	/* checking for ints */
+	for (i = 0; num[i]; i++)
+	{
+		if (num[i] < '0' || num[i] > '9')
+			return (0);
+	}
+	return (1);
+}
+/**
+  * err - errors r us
+  * @status: error code 4 exit
+  * Return: void
+  */
+void err(int status)
+{
+	_putchar('E');
+	_putchar('r');
+	_putchar('r');
+	_putchar('o');
+	_putchar('r');
+	_putchar('\n');
+	exit(status);
+}
+/**
+  * main - getting the args
+  * @argc: args #
+  * @argv: arg array
+  * Return: 0
+  */
 int main(int argc, char **argv)
 {
-	char *r;
-	int a, c, x;
-
+	/* declarations */
+	int i, j, len1 = 0, len2 = 0;
+	int *res;
+	/* too many args? too few? */
 	if (argc != 3)
-		printf("Error\n"), exit(98);
-
-	x = _strlen(argv[1]) + _strlen(argv[2]);
-	r = big_multiply(argv[1], argv[2]);
-	c = 0;
-	a = 0;
-	while (c < x)
 	{
-		if (r[c])
-			a = 1;
-		if (a)
-			_putchar(r[c] + '0');
-		c++;
+		err(98);
 	}
-	if (!a)
-		_putchar('0');
-	_putchar('\n');
-	free(r);
+	/* using isvalid */
+	for (i = 1; i < argc; i++)
+	{
+		if (!(is_valid(argv[i])))
+			err(98);
+		if (i == 1)
+		{
+			for (j = 0; argv[i][j]; j++)
+				len1++;
+		}
+		if (i == 2)
+		{
+			for (j = 0; argv[i][j]; j++)
+				len2++;
+		}
+	}
+	res = int_calloc(len1 + len2, sizeof(int));
+	if (res == NULL)
+		err(98);
+	mult(res, argv[1], argv[2], len1, len2);
+	free(res);
 	return (0);
 }
