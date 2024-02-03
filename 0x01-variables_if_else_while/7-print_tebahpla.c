@@ -8,11 +8,12 @@
 
 int main(void)
 {
-	char x;
+	char array[26] = "abcdefghijklmnopqrstuvwxyz";
+	int i;
 
-	for (x = 'z'; x >= 'a'; x--)
+	for (i = 25; i >= 0; i--)
 	{
-		putchar(x);
+		putchar(array[i]);
 	}
 	putchar('\n');
 	return (0);
