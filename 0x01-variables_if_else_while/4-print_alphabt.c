@@ -11,7 +11,7 @@ int main(void)
 	int i;
 	char array[27] = "abcdefghijklmnopqrstuvwxyz\n";
 
-	for (i = 0; i < 25; i++)
+	for (i = 0; i < 27; i++)
 	{
 		if (array[i] == 'q' || array[i] == 'e')
 		{
