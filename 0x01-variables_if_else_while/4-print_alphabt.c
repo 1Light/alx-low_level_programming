@@ -13,7 +13,7 @@ int main(void)
 
 	for (i = 0; i < 25; i++)
 	{
-		if (array[i] == q || array[i] == e)
+		if (array[i] == 'q' || array[i] == 'e')
 		{
 			continue;
 		}
