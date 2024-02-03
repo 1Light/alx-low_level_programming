@@ -8,9 +8,10 @@
 
 int main(void)
 {
+	int i;
 	char array[26] = "abcdefghijklmnopqrstuvwxyz";
 
-	for (int i = 0; i < 26; i++)
+	for (i = 0; i < 26; i++)
 	{
 		putchar(array[i]);
 	}
