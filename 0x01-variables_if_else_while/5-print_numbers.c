@@ -1,18 +1,19 @@
 #include <stdio.h>
 
 /**
- * main - Prints numbers from 0 to 9.
+ * main - entry point
  *
- * Return: Always 0 (Success)
+ * Result: 0
  */
+
 int main(void)
 {
+	char array[11] = "0123456789\n";
 	int i;
 
-	for (i = 0; i < 10; i++)
+	for (i = 0; i < 11; i++)
 	{
-		printf("%d", i);
+		printf("%c", array[i]);
 	}
-	putchar('\n');
 	return (0);
 }
