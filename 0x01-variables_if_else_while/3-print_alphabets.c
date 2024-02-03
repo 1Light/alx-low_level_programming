@@ -9,17 +9,20 @@
 
 int main(void)
 {
+	int i;
+	int j = 0;
+
 	char array[26] = "abcdefghijklmnopqrstuvwxyz";
 
-	for (int i = 0; i < 26; i++)
+	for (i = 0; i < 26; i++)
 	{
 		putchar(array[i]);
 	}
-	int i = 0;
-	while (i < 26)
+	
+	while (j < 26)
 	{
-		putchar(toupper(array[i]));
-		i++;
+		putchar(toupper(array[j]));
+		j++;
 	}
 	putchar('\n');
 	return (0);
