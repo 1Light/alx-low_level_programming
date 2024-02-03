@@ -2,19 +2,22 @@
 
 /**
  * main - entry point
- * This is smart and dumb at the same time
  *
  * Return: 0
  */
 
 int main(void)
 {
-	char array[16] = "0123456789abcdef";
 	int i;
+	char c;
 
-	for (i = 0; i < 16; i++)
+	for (i = 0; i < 10; i++)
 	{
-		putchar(array[i]);
+		putchar(i + '0');
+	}
+	for (c = 'a'; c <= 'f'; c++)
+	{
+		putchar(c);
 	}
 	putchar('\n');
 	return (0);
