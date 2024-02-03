@@ -1,18 +1,19 @@
 #include <stdio.h>
 
 /**
- * main - prints the lowercase alphabet in reverse,
- * followed by a new line
- * Return: Always 0 (Success)
+ * main - entry point
+ *
+ * Return: 0
  */
+
 int main(void)
 {
-	char ch;
+	char array[27] = "zyxwvutsrqponmlkjihgfedcba\n";
+	int i;
 
-	for (ch = 'z'; ch >= 'a'; ch--)
+	for (i = 0; i < 27; i++)
 	{
-		putchar(ch);
+		putchar(array[i]);
 	}
-	putchar('\n');
 	return (0);
 }
