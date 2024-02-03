@@ -2,7 +2,7 @@
 #include <ctype.h>
 
 /**
- * main - entry point 
+ * main - entry point
  *
  * Return: 0
  */
@@ -18,7 +18,7 @@ int main(void)
 	{
 		putchar(array[i]);
 	}
-	
+
 	while (j < 26)
 	{
 		putchar(toupper(array[j]));
